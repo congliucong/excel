@@ -5,8 +5,7 @@ import mysqlConnect
 from tqdm import tqdm
 
 
-
-
+# 操作excel
 def read_excel(path):
     for root, dirs, files in os.walk(path):
         paraArr = []
@@ -39,7 +38,7 @@ def open_excel(file_name, file_path):
             rows = sheet_row
             t_menu = rows[0].value
             t_count = int(rows[1].value)
-            dataarr = ['' + t_menu + '',t_count,'' + sheet_name + '','' + file_date + '']
+            dataarr = ['' + t_menu + '', t_count, '' + sheet_name + '', '' + file_date + '']
             sqlArr.append(dataarr)
     return sqlArr
 
