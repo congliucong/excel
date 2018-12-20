@@ -5,7 +5,7 @@ import mysqlConnect
 from tqdm import tqdm
 
 
-# 操作excel
+# 操作excel LCC
 def read_excel(path):
     for root, dirs, files in os.walk(path):
         paraArr = []
