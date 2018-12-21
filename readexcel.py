@@ -7,6 +7,7 @@ from tqdm import tqdm
 
 # 操作excel LCC
 def read_excel(path):
+    print("开始执行！")
     for root, dirs, files in os.walk(path):
         paraArr = []
         for fileName in files:
@@ -19,6 +20,8 @@ def read_excel(path):
         app.truncateTable('TRUNCATE TABLE t_menu')
         sql = 'insert into t_menu(menu,count,restaurant,createtime) values (%s, %s, %s, %s)'
         app.batchinsertTable(sql, paraArr)
+    print("执行结束！")
+    return 1
 
 
 def open_excel(file_name, file_path):
@@ -42,7 +45,3 @@ def open_excel(file_name, file_path):
             sqlArr.append(dataarr)
     return sqlArr
 
-
-if __name__ == '__main__':
-    path = 'D:\\food'
-    read_excel(path)
