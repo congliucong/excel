@@ -51,6 +51,9 @@ class Example(QWidget):
 
 
 if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    ex = Example()
-    sys.exit(app.exec_())
+    # app = QApplication(sys.argv)
+    # ex = Example()
+    # sys.exit(app.exec_())
+
+    for num in range(0, 20):
+        print(num)
