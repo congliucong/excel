@@ -48,12 +48,15 @@ class Example(QWidget):
         else:
             event.ignore()
 
+    def testname(self, tablename):
+        str = 'insert into "+tablename+"'
+        print(str)
+
 
 
 if __name__ == '__main__':
     # app = QApplication(sys.argv)
     # ex = Example()
     # sys.exit(app.exec_())
-
-    for num in range(0, 20):
-        print(num)
+    ex = Example()
+    ex.testname('menu')
