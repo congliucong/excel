@@ -58,5 +58,5 @@ if __name__ == '__main__':
     # app = QApplication(sys.argv)
     # ex = Example()
     # sys.exit(app.exec_())
-    ex = Example()
-    ex.testname('menu')
+    # ex = Example()
+    # ex.testname('menu')

@@ -38,14 +38,16 @@ def read_excel(path, tablename, startrow, endrow, *rowname):
         print('插入语句:' + sql)
         # 批量插入
         total = len(paraArr)
+        print(total)
         count = math.ceil(total/100)
         for index in range(0, count):
             if index != count -1:
                 start = index * 100
-                end = (index+1) * 100 - 1
+                end = (index+1) * 100
             else:
                 start = index * 100
                 end = total
+            print(paraArr[start:end])
             app.batchinsertTable(sql, paraArr[start:end])
             print('执行'+str(start)+'到'+str(end)+'条成功')
 
@@ -58,7 +60,10 @@ def read_excel(path, tablename, startrow, endrow, *rowname):
 def create_table(tablename, *rowname):
     row = ''
     for name in rowname:
-        row = row+''+name+' varchar(100) NULL,'
+        if name == 'count':
+            row = row + '' + name + ' int(0) NULL,'
+        else:
+            row = row+''+name+' varchar(100) NULL,'
     sql = 'CREATE TABLE '+tablename+' ( id int(0) NOT NULL AUTO_INCREMENT,'+row+'  PRIMARY KEY (id))   '
     print('建表语句：'+sql)
     app = mysqlConnect.MysqlUtil()
@@ -82,7 +87,6 @@ def open_excel(file_name, file_path):
             rows = sheet_row
             dataarr = []
             for i in range(0, len(rows)):
-                print(rows[i].value)
                 if type(rows[i].value) == float:
                     rowname = str(int(rows[i].value))
                 elif type(rows[i].value) == int:
@@ -91,13 +95,16 @@ def open_excel(file_name, file_path):
                     rowname = rows[i].value
 
                 dataarr.append('' + rowname + '')
+            dataarr.append('' + sheet_name + '')
+            dataarr.append('' + file_name + '')
+            # print(dataarr)
             sqlArr.append(dataarr)
     return sqlArr
 
 
 if __name__ == '__main__':
     # print("开始执行！")
-    path = 'D:\\food'
-    read_excel(path, 'building', 1, 1629, 'ordernum', 'name', 'nickname', 'dept', 'num', 'innercode', 'outercode', 'applytime', 'returntime', 'sign', 'remark', 'idcard', 'usetime', 'remark2')
+    path = 'D:\\meican'
+    read_excel(path, 'meican', 1, 1629, 'menu', 'count', 'restaurant', 'createtime')
     # print("结束执行！")
 
