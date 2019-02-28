@@ -42,10 +42,11 @@ def read_excel(path, tablename, startrow, endrow, *rowname):
         for index in range(0, count):
             if index != count -1:
                 start = index * 100
-                end = (index+1) * 100 - 1
+                end = (index+1) * 100
             else:
                 start = index * 100
                 end = total
+            # 切片[0:99] 最后一个不存在，所以要[0:100]
             app.batchinsertTable(sql, paraArr[start:end])
             print('执行'+str(start)+'到'+str(end)+'条成功')
 
@@ -82,22 +83,26 @@ def open_excel(file_name, file_path):
             rows = sheet_row
             dataarr = []
             for i in range(0, len(rows)):
-                print(rows[i].value)
+                # print(rows[i].value)
                 if type(rows[i].value) == float:
                     rowname = str(int(rows[i].value))
                 elif type(rows[i].value) == int:
                     rowname = str(rows[i].value)
                 else:
                     rowname = rows[i].value
-
                 dataarr.append('' + rowname + '')
+            dataarr.append('' + sheet_name + '')
+            dataarr.append('' + file_date + '')
+            print(dataarr)
             sqlArr.append(dataarr)
     return sqlArr
 
 
 if __name__ == '__main__':
     # print("开始执行！")
-    path = 'D:\\food'
-    read_excel(path, 'building', 1, 1629, 'ordernum', 'name', 'nickname', 'dept', 'num', 'innercode', 'outercode', 'applytime', 'returntime', 'sign', 'remark', 'idcard', 'usetime', 'remark2')
+    path = 'D:\\dinner'
+    # read_excel(path, 'building', 1, 1629, 'ordernum', 'name', 'nickname', 'dept', 'num', 'innercode', 'outercode', 'applytime', 'returntime', 'sign', 'remark', 'idcard', 'usetime', 'remark2')
+    read_excel(path, '02_28_dinner', 1, 1629, 'menu', 'count', 'restaurant', 'day')
+
     # print("结束执行！")
 
