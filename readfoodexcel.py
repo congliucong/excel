@@ -100,9 +100,9 @@ def open_excel(file_name, file_path):
 
 if __name__ == '__main__':
     # print("开始执行！")
-    path = 'D:\\dinner'
+    path = 'D:\\yexiao'
     # read_excel(path, 'building', 1, 1629, 'ordernum', 'name', 'nickname', 'dept', 'num', 'innercode', 'outercode', 'applytime', 'returntime', 'sign', 'remark', 'idcard', 'usetime', 'remark2')
-    read_excel(path, '02_28_dinner', 1, 1629, 'menu', 'count', 'restaurant', 'day')
+    read_excel(path, '03_21_yexiao', 1, 1629, 'menu', 'count', 'restaurant', 'day')
 
     # print("结束执行！")
 

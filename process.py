@@ -16,7 +16,7 @@ canvas.place(x=110, y=60)
 def progress():
     # 填充进度条
     fill_line = canvas.create_rectangle(1.5, 1.5, 0, 23, width=0, fill="green")
-    x = 500  # 未知变量，可更改
+    x = 20  # 未知变量，可更改
     n = 465 / x  # 465是矩形填充满的次数
     for i in range(x):
         n = n + 465 / x

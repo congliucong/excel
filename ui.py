@@ -2,6 +2,7 @@ import tkinter as tk
 import tkinter.messagebox
 import tkinter.filedialog
 from tkinter import END
+import time
 import webbrowser
 import os.path
 
@@ -18,23 +19,23 @@ bookname = ''
 class SentToKindleUI(object):
     def __init__(self, object):
         # 推送信息
-        self.lf_sendinfo = tk.LabelFrame(object, width=256, height=144, text='推送信息')
+        self.lf_sendinfo = tk.LabelFrame(object, width=355, height=144, text='推送信息')
         self.lf_sendinfo.grid(row=0, column=0, sticky='w', padx=10)
 
         self.label_sendinfo_kindlemail = tk.Label(self.lf_sendinfo, width=12, text='Kindle邮箱：')
         self.label_sendinfo_kindlemail.place(x=5, y=2)
         self.label_sendinfo_entry1 = tk.Entry(self.lf_sendinfo, relief='solid')
-        self.label_sendinfo_entry1.place(x=100, y=2)
+        self.label_sendinfo_entry1.place(x=100, y=2, width=200)
 
         self.label_sendinfo_sendmail = tk.Label(self.lf_sendinfo, width=12, text='推送邮箱：')
         self.label_sendinfo_sendmail.place(x=5, y=30)
         self.label_sendinfo_entry2 = tk.Entry(self.lf_sendinfo, relief='solid')
-        self.label_sendinfo_entry2.place(x=100, y=30)
+        self.label_sendinfo_entry2.place(x=100, y=30, width=200)
 
         self.label_sendinfo_password = tk.Label(self.lf_sendinfo, width=12, text='推送邮箱密码：')
         self.label_sendinfo_password.place(x=5, y=58)
         self.label_sendinfo_entry3 = tk.Entry(self.lf_sendinfo, relief='solid', show='*')
-        self.label_sendinfo_entry3.place(x=100, y=58)
+        self.label_sendinfo_entry3.place(x=100, y=58, width=200)
 
         # 校验三个Entries的内容
         def label_sendinfo_bt_click():
@@ -44,7 +45,7 @@ class SentToKindleUI(object):
             mail_pass = self.label_sendinfo_entry3.get()
 
             # 检查kindle邮箱
-            if receiver.endswith('kindle.com') or receiver.endswith('kindle.cn'):
+            if receiver.endswith('kindle.com') or receiver.endswith('kindle.cn') or receiver.endswith('qq.com'):
                 pass
             else:
                 tk.messagebox.showinfo(title='HI', message='Kindle邮箱必须以kindle.com或kindle.cn结尾。')
@@ -94,7 +95,7 @@ class SentToKindleUI(object):
         self.label_sendinfo_bt.place(x=175, y=86)
 
         # 文件选择
-        self.lf_file = tk.LabelFrame(object, width=256, height=128, text='文件选择')
+        self.lf_file = tk.LabelFrame(object, width=355, height=128, text='文件选择')
         self.lf_file.grid(row=1, column=0, sticky='w', padx=10)
 
         self.lf_file_label = tk.Label(self.lf_file,
@@ -128,29 +129,58 @@ class SentToKindleUI(object):
         self.lf_file_bt.place(x=2, y=2)
         self.lf_file_label.place(x=2, y=42)
 
-        # 描述信息
-        self.lf_desc = tk.LabelFrame(object, width=256, height=96, text='说明')
-        self.lf_desc.grid(row=2, column=0, sticky='w', padx=10)
+        # 进度条
+        # def progress():
+        #     # 填充进度条
+        #     fill_line = canvas.create_rectangle(1.5, 1.5, 0, 23, width=0, fill="green")
+        #     x = 500  # 未知变量，可更改
+        #     n = 465 / x  # 465是矩形填充满的次数
+        #     for i in range(x):
+        #         n = n + 465 / x
+        #         canvas.coords(fill_line, (0, 0, n, 60))
+        #         root.update()
+        #         time.sleep(0.02)  # 控制进度条流动的速度
+        #
+        #     # 清空进度条
+        #     fill_line = canvas.create_rectangle(1.5, 1.5, 0, 23, width=0, fill="white")
+        #     x = 500  # 未知变量，可更改
+        #     n = 465 / x  # 465是矩形填充满的次数
+        #
+        #     for t in range(x):
+        #         n = n + 465 / x
+        #         # 以矩形的长度作为变量值更新
+        #         canvas.coords(fill_line, (0, 0, n, 60))
+        #         root.update()
+        #         time.sleep(0)  # 时间为0，即飞速清空进度条
+        #
+        # # 描述信息
+        # self.lf_desc = tk.LabelFrame(object, width=256, height=55, text='进度条')
+        # self.lf_desc.grid(row=2, column=0, sticky='w', padx=10)
+        #
+        # # 设置下载进度条
+        # canvas = tk.Canvas(self.lf_desc, width=256, height=22, bg="white")
+        # canvas.place(x=-1, y=0)
 
-        def callback(event):
-            webbrowser.open_new(
-                r"https://journal.ethanshub.com/post/category/gong-cheng-shi/-python-kindledian-zi-shu-tui-song#toc_4")
 
-        self.tmp = "目前一些使用的约束"
-        self.lf_desc_label = tk.Label(self.lf_desc,
-                                      fg='blue',
-                                      cursor='hand2',
-                                      width=34,
-                                      text=self.tmp,
-                                      anchor='w',
-                                      justify='left',
-                                      wraplength=250
-                                      )
-        self.lf_desc_label.place(x=2, y=2)
-        self.lf_desc_label.bind("<Button-1>", callback)
+        # def callback(event):
+        #     webbrowser.open_new(
+        #         r"https://journal.ethanshub.com/post/category/gong-cheng-shi/-python-kindledian-zi-shu-tui-song#toc_4")
+        #
+        # self.tmp = "目前一些使用的约束"
+        # self.lf_desc_label = tk.Label(self.lf_desc,
+        #                               fg='blue',
+        #                               cursor='hand2',
+        #                               width=34,
+        #                               text=self.tmp,
+        #                               anchor='w',
+        #                               justify='left',
+        #                               wraplength=250
+        #                               )
+        # self.lf_desc_label.place(x=2, y=2)
+        # self.lf_desc_label.bind("<Button-1>", callback)
 
         # 按钮
-        self.lf_button = tk.Frame(object, width=256, height=96)
+        self.lf_button = tk.Frame(object, width=355, height=96)
         self.lf_button.grid(row=3, column=0, sticky='w', padx=10)
 
         def lf_button_bt1_click():
@@ -158,7 +188,12 @@ class SentToKindleUI(object):
             # 如果账号密码没有传入,则调用验证方法
             if mail_host == "" and mail_user == "" and mail_pass == "":
                 label_sendinfo_bt_click()
-            SendToKindle.SendToKindle(mail_host, mail_user, mail_pass, receiver, fullpath, bookname)
+            flag = SendToKindle.SendToKindle(mail_host, mail_user, mail_pass, receiver, fullpath, bookname)
+            if flag:
+                tk.messagebox.showinfo(title='HI', message='发送成功')
+            else:
+                tk.messagebox.showinfo(title='HI', message='发送失败')
+
 
         self.lf_button_bt1 = tk.Button(self.lf_button,
                                        text='发送',
@@ -166,7 +201,7 @@ class SentToKindleUI(object):
                                        height=2,
                                        command=lf_button_bt1_click
                                        )
-        self.lf_button_bt1.place(x=20, y=5)
+        self.lf_button_bt1.place(x=55, y=5)
 
         self.lf_button_bt2 = tk.Button(self.lf_button,
                                        text='取消',
@@ -174,15 +209,15 @@ class SentToKindleUI(object):
                                        height=2,
                                        command=self.lf_sendinfo.quit
                                        )
-        self.lf_button_bt2.place(x=123, y=5)
+        self.lf_button_bt2.place(x=183, y=5)
 
 
 # 初始化窗口
 root = tk.Tk()
 root.title('Sent to Kindle')
 
-width = 276
-height = 432
+width = 376
+height = 332
 screenwidth = root.winfo_screenwidth()
 screenheight = root.winfo_screenheight()
 size = '%dx%d+%d+%d' % (width, height, (screenwidth - width) / 2, (screenheight - height) / 2)

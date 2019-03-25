@@ -21,5 +21,7 @@ def SendToKindle(mail_host, mail_user, mail_pass, receiver, fullpath, bookname):
         server.login(mail_user, mail_pass)
         server.sendmail(mail_user, [receiver], message.as_string())
         server.quit()
+        return True
     except Exception as e:
         print("There is a exception", e)
+        return False
