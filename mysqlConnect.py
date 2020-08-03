@@ -15,7 +15,7 @@ class MysqlUtil():
 
     def getConnect(self):
         # 参数依次是：IP地址,数据库登录名，数据库密码，数据库实体名称,指定字符集 （未指定可能出现中文乱码）
-        db = mysql.connect("47.97.191.90", "root", "123456", "yangzongyi", charset='utf8')
+        db = mysql.connect("127.0.0.1", "root", "123456", "score", charset='utf8')
         return db
 
     '''
